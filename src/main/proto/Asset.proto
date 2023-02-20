@@ -1,0 +1,30 @@
+syntax = "proto3";
+package io.ramoura.api.grpc.v1;
+option java_package = "io.ramoura.api.grpc.v1";
+option java_multiple_files = true;
+
+message AssetCreateRequest {
+  string ticker = 1;
+  string shortName = 2;
+  string longName = 3;
+  string currencyCode = 4;
+}
+
+message AssetResponse {
+  string assetId = 1;
+  string ticker = 2;
+  string shortName = 3;
+  string longName = 4;
+  string currencyCode = 5;
+}
+
+message AssetFindRequest {
+  string assetId = 1;
+}
+
+
+service AssetService {
+
+  rpc Create(AssetCreateRequest) returns (AssetResponse);
+  rpc find(AssetFindRequest) returns (AssetResponse);
+}

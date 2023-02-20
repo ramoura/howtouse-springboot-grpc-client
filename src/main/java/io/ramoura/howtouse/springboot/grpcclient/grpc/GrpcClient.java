@@ -2,8 +2,8 @@ package io.ramoura.howtouse.springboot.grpcclient.grpc;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.ramoura.api.grpc.v1.PersonServiceGrpc;
-import io.ramoura.api.grpc.v1.PersonServiceGrpc.PersonServiceBlockingStub;
+import io.ramoura.api.grpc.v1.AssetServiceGrpc;
+import io.ramoura.api.grpc.v1.AssetServiceGrpc.AssetServiceBlockingStub;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,14 +21,14 @@ public class GrpcClient {
     private int port;
 
     private ManagedChannel channel;
-    private PersonServiceBlockingStub personServiceBlockingStub;
+    private AssetServiceBlockingStub assetServiceBlockingStub;
 
     public void start() {
         channel = ManagedChannelBuilder.forAddress(host, port)
-                .usePlaintext()
-                .build();
+            .usePlaintext()
+            .build();
 
-        personServiceBlockingStub = PersonServiceGrpc.newBlockingStub(channel);
+        assetServiceBlockingStub = AssetServiceGrpc.newBlockingStub(channel);
         log.info("gRPC client connected to {}:{}", host, port);
     }
 
@@ -37,8 +37,8 @@ public class GrpcClient {
         log.info("gRPC client disconnected successfully.");
     }
 
-    public PersonServiceBlockingStub getSourceServiceStub() {
-        return this.personServiceBlockingStub;
+    public AssetServiceBlockingStub getSourceServiceStub() {
+        return this.assetServiceBlockingStub;
     }
 
 }
